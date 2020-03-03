@@ -7,6 +7,7 @@ and influenced by other projects such as Flaskerize and the Flask Megatutorial.
 
 Outline:
 
+```
 application.py
 app/
     |-static/
@@ -22,6 +23,7 @@ app/
             |-utility
         |-auth
     |-reverse_proxy/
+```
 
 ### Front End
 This is intended to house Blueprints whos views are user-facing and interactive.
