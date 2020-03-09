@@ -4,33 +4,31 @@ from flask import (
     Flask, jsonify, session)
 from flask.wrappers import Response
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from flask_migrate import Migrate, MigrateCommand
+from flask_script import Manager
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager
 from flask_principal import (
-    Principal, Permission, RoleNeed,
-    Identity, identity_changed, current_app)
+    Principal, Identity, identity_changed,
+    current_app)
 from flask_restful import Api
 from flask_marshmallow import Marshmallow
 from app.reverse_proxy import ReverseProxied
 
+from app.backend.api.resource.user.model import User
 
 db = SQLAlchemy()
 ma = Marshmallow()
 api = Api()
 migrate = Migrate()
+manager = Manager()
 csrf = CSRFProtect()
+principals = Principal()
 
 login = LoginManager()
 login.login_view = 'auth_route.login'
 login.login_message = 'Login required!'
 login.refresh_view = 'auth_route.login'
-
-# Permissions
-principals = Principal()
-sys_admin_permission = Permission(RoleNeed('sys_admin_permission'))
-user_permission = Permission(RoleNeed('user_permission'))
-god_permission = Permission(RoleNeed('god_permission'))
 
 
 def create_app(env: str = None) -> Flask:
@@ -94,10 +92,14 @@ def database_manager(env: str = None) -> Flask:
 
     """
 
-    from app.config import config_by_name
-
     app = Flask(__name__)
-    app.config.from_object(config_by_name[env or "development"])
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+
     db.init_app(app)
 
-    return app
+    migrate.init_app(app, db)
+    
+    manager = Manager(app)
+    manager.add_command('db', MigrateCommand)
+
+    return manager

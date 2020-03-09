@@ -1,5 +1,5 @@
-from app.user.models import User
-from app import db, login
+from app.backend.api.resource.user.model import User
+from __main__ import db, login
 
 @login.user_loader
 def load_user(username):

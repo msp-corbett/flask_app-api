@@ -1,5 +1,5 @@
 """ App Configuration """
-from os import environ
+from os import environ, path
 from typing import List, Type
 
 
@@ -14,9 +14,12 @@ class BaseConfig:
 class DevelopmentConfig(BaseConfig):
     CONFIG_NAME = "development"
     SECRET_KEY = environ.get('DEV_SECRET_KEY', 'TheyTried2MakeMeG02Rhab')
-    #SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
     TESTING = False
-    #SQLALCHEMY_DATABASE_URI = environ.get('DEV_SQLALCHEMY_DATABASE_URI')
+    
+    basedir = path.abspath(path.dirname(__file__))
+    SQLALCHEMY_DATABASE_URI = environ.get('DEV_SQLALCHEMY_DATABASE_URI') or \
+        'sqlite:///' + path.join(basedir, 'app.db')
 
 
 class TestingConfig(BaseConfig):
