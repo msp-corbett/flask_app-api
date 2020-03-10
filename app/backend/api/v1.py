@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask_restful import Api
-from .user import *
+from app.backend.resource.user import *
 from .widget_x import *
 from .widget_y import *
 

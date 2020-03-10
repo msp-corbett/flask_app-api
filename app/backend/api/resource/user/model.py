@@ -1,5 +1,6 @@
 from sqlalchemy import UniqueConstraint
-from __main__ import db
+from marshmallow import post_dump, pre_load,  post_load
+from app import db, ma
 
 class User(db.Model):
     __tablename__ = "User"
@@ -12,3 +13,8 @@ class User(db.Model):
     FirstName = db.Column(db.String(150))
     LastName = db.Column(db.String(150))
     Email = db.Column(db.String(150))
+
+
+class UserSchema(ma.ModelSchema):
+    class Meta:
+        model = User

@@ -76,30 +76,19 @@ def create_app(env: str = None) -> Flask:
 
     return app
 
+
 def database_manager(env: str = None) -> Flask:
     """ Create App to Manager Databases
 
-    This function is used in conjunction with
-    the script manage_db.py to record database
-    migrations and perform upgrades.
-    
-    Keyword Arguments:
-    env: Name of the configuartion to launch - 
-        'development', 'testing', 'production'
-
-    Returns:
-        Flask() -- The Flask app
-
+        This function is used in conjunction with
+        the script manage_db.py to record database
+        migrations and perform upgrades.
     """
 
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+    from app.config import config_by_name
+    app.config.from_object(config_by_name[env or "development"])
 
     db.init_app(app)
 
-    migrate.init_app(app, db)
-    
-    manager = Manager(app)
-    manager.add_command('db', MigrateCommand)
-
-    return manager
+    return app

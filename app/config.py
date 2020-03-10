@@ -19,7 +19,7 @@ class DevelopmentConfig(BaseConfig):
     
     basedir = path.abspath(path.dirname(__file__))
     SQLALCHEMY_DATABASE_URI = environ.get('DEV_SQLALCHEMY_DATABASE_URI') or \
-        'sqlite:///' + path.join(basedir, 'app.db')
+        'sqlite:///app.db'
 
 
 class TestingConfig(BaseConfig):

@@ -20,6 +20,141 @@
                 "--no-reload"
             ],
             "jinja": true
-        }
+        },
+        {
+            "name": "Python: Alembic migrate",
+            "type": "python",
+            "request": "launch",
+            "program":"${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "db",
+                "migrate"
+            ],
+            "env": {
+                "FLASK_APP": "application.py",
+                "FLASK_ENV": "development",
+                "FLASK_DEBUG": "0",
+                "DB_USER": "",
+                "DB_PSWD": "",
+                "DB_HOSTING": "local",
+            }
+        },
+        {
+            "name": "Python: Alembic upgrade",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "db",
+                "upgrade",
+                "7535152155ec"
+            ],
+            "env": {
+                "FLASK_APP": "application.py",
+                "FLASK_ENV": "migrate",
+                "FLASK_DEBUG": "0",
+                "DB_USER": "",
+                "DB_PSWD": "",
+                "DB_HOSTING": "local",
+            },
+        },
+        {
+            "name": "Python: Alembic downgrade",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "db",
+                "downgrade",
+                "e575ef29a020"
+            ],
+            "env": {
+                "FLASK_APP": "application.py",
+                "FLASK_ENV": "migrate",
+                "FLASK_DEBUG": "0",
+                "DB_USER": "",
+                "DB_PSWD": "",
+                "DB_HOSTING": "local",
+            },
+        },
+        {
+            "name": "Python: Alembic current",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "db",
+                "current"
+            ],
+            "env": {
+                "FLASK_APP": "application.py",
+                "FLASK_ENV": "migrate",
+                "FLASK_DEBUG": "0",
+                "DB_USER": "",
+                "DB_PSWD": "",
+                "DB_HOSTING": "local",
+            },
+        },
+        {
+            "name": "Python: Alembic history",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "db",
+                "history"
+            ],
+            "env": {
+                "FLASK_APP": "application.py",
+                "FLASK_ENV": "migrate",
+                "FLASK_DEBUG": "0",
+                "DB_USER": "",
+                "DB_PSWD": "",
+                "DB_HOSTING": "local",
+            },
+        },
+        {
+            "name": "Python: Alembic heads",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "db",
+                "heads"
+            ],
+            "env": {
+                "FLASK_APP": "application.py",
+                "FLASK_ENV": "migrate",
+                "FLASK_DEBUG": "0",
+                "DB_USER": "",
+                "DB_PSWD": "",
+                "DB_HOSTING": "local",
+            },
+        },
+        {
+            "name": "Python: Alembic stamp heads",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "db",
+                "stamp",
+                "heads"
+            ],
+            "env": {
+                "FLASK_APP": "application.py",
+                "FLASK_ENV": "migrate",
+                "FLASK_DEBUG": "0",
+                "DB_USER": "",
+                "DB_PSWD": "",
+                "DB_HOSTING": "local",
+            },
     ]
 }
